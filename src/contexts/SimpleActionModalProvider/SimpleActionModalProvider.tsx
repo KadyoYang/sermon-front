@@ -20,21 +20,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export interface SimpleAlertProviderProps{
+export interface SimpleActionModalProps{
     fillTitle:(title:string)=>void,
     fillSubTitle:(subTitle:string)=>void,
     handleOpen:()=>void,
     handleClose:()=>void,
+    fillContent:(content:JSX.Element)=>void,
 }
 
-export const Context = createContext<SimpleAlertProviderProps>({
+export const Context = createContext<SimpleActionModalProps>({
     fillTitle:(title:string)=>{},
     fillSubTitle:(subTitle:string)=>{},
     handleOpen:()=>{},
     handleClose:()=>{},
+    fillContent:(content:JSX.Element)=>{},
 })
 
-const SimpleAlertProvider:React.FC = ({children}) => {
+const SimpleActionModalProvider:React.FC = ({children}) => {
     const [title, setTitle] = useState<string>("");
     const [subTitle, setSubTitle] = useState<string>("");
 
@@ -45,6 +47,10 @@ const SimpleAlertProvider:React.FC = ({children}) => {
     const handleOpen = () => {setOpen(true);}
     const handleClose = () => {setOpen(false);}
 
+    const [content, setContent] = useState<JSX.Element>((<div>null</div>));
+    const fillContent = (content:JSX.Element) => {setContent(content);}
+
+
     const classes = useStyles();
 
 
@@ -54,11 +60,12 @@ const SimpleAlertProvider:React.FC = ({children}) => {
           <p id="simple-modal-description">
             {subTitle}
           </p>
+          {content}
         </div>
       );
 
     return (
-    <Context.Provider value={{fillTitle, fillSubTitle, handleOpen, handleClose}}>
+    <Context.Provider value={{fillTitle, fillSubTitle, handleOpen, handleClose, fillContent}}>
         <Modal
             open={open}
             onClose={handleClose}
@@ -75,4 +82,4 @@ const SimpleAlertProvider:React.FC = ({children}) => {
 }
 
 
-export default SimpleAlertProvider;
+export default SimpleActionModalProvider;

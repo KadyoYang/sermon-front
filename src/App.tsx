@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import ColorThemeProvider from './contexts/ColorThemeProvider';
 import AccountStatusProvider from './contexts/AccountStatusProvider';
 import SimpleAlertProvider from './contexts/SimpleAlertProvider';
+import SimpleActionModalProvider from './contexts/SimpleActionModalProvider';
 
 import FrameContainer from './components/FrameContainer';
 import MainFrame from './components/MainFrame';
@@ -45,6 +46,7 @@ function App() {
 
 const Providers: React.FC = ({children}) => {
   return (
+    <SimpleActionModalProvider>
     <SimpleAlertProvider>
     <AccountStatusProvider>
     <ColorThemeProvider>
@@ -52,6 +54,7 @@ const Providers: React.FC = ({children}) => {
     </ColorThemeProvider>
     </AccountStatusProvider>
     </SimpleAlertProvider>
+    </SimpleActionModalProvider>
 
   )
 }
