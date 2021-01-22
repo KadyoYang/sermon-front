@@ -6,7 +6,7 @@ const MainFrame: React.FC = ({children}) => {
     return(
         <Container>      
             <LeftContent>{children}</LeftContent>
-            <RightBlank></RightBlank>
+            <RightBlank></RightBlank>{/* 아무것도 없는 빈칸 */}
         </Container>
     )
 }

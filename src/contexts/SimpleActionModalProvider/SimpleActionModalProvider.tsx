@@ -1,4 +1,4 @@
-import React, {useState, createContext} from 'react'
+import React, {useState, createContext, useEffect} from 'react'
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -25,7 +25,7 @@ export interface SimpleActionModalProps{
     fillSubTitle:(subTitle:string)=>void,
     handleOpen:()=>void,
     handleClose:()=>void,
-    fillContent:(content:JSX.Element)=>void,
+    fillContent:(content:React.ReactNode)=>void,
 }
 
 export const Context = createContext<SimpleActionModalProps>({
@@ -33,7 +33,7 @@ export const Context = createContext<SimpleActionModalProps>({
     fillSubTitle:(subTitle:string)=>{},
     handleOpen:()=>{},
     handleClose:()=>{},
-    fillContent:(content:JSX.Element)=>{},
+    fillContent:(content:React.ReactNode)=>{},
 })
 
 const SimpleActionModalProvider:React.FC = ({children}) => {
@@ -47,22 +47,26 @@ const SimpleActionModalProvider:React.FC = ({children}) => {
     const handleOpen = () => {setOpen(true);}
     const handleClose = () => {setOpen(false);}
 
-    const [content, setContent] = useState<JSX.Element>((<div>null</div>));
-    const fillContent = (content:JSX.Element) => {setContent(content);}
+    const [content, setContent] = useState<React.ReactNode>(<div>null</div>);
+    const fillContent = (content:React.ReactNode) => {setContent(content);console.log("fillcontent")}
+
+
 
 
     const classes = useStyles();
 
+/*     useEffect(()=>{
+      if(open==false){
+        setTitle("");
+        setSubTitle("");
+        setContent((<div></div>));
+      }else{}
 
-    const body = (
-        <div className={classes.paper}>
-          <h2 id="simple-modal-title">{title}</h2>
-          <p id="simple-modal-description">
-            {subTitle}
-          </p>
-          {content}
-        </div>
-      );
+    }, [open]) */
+
+
+
+    console.log("simple action modal provider 리렌더");
 
     return (
     <Context.Provider value={{fillTitle, fillSubTitle, handleOpen, handleClose, fillContent}}>
@@ -72,7 +76,13 @@ const SimpleActionModalProvider:React.FC = ({children}) => {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
         >
-            {body}
+          <div className={classes.paper}>
+            <h2 id="simple-modal-title">{title}</h2>
+            <p id="simple-modal-description">
+              {subTitle}
+            </p>
+          {React.isValidElement(content) && React.cloneElement(content)}
+        </div>
         </Modal>
         {children}
     </Context.Provider>

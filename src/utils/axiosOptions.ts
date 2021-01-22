@@ -1,6 +1,8 @@
 import qs from 'querystring';
-require('dotenv').config();
+import dotenv from 'dotenv';
 import {AxiosRequestConfig} from 'axios';
+
+dotenv.config();
 
 const serverAddr = process.env.REACT_APP_SERVER_ADDR
 const serverPort = process.env.REACT_APP_SERVER_PORT

@@ -10,6 +10,7 @@ const ColorThemeProvider: React.FC = ({children}) => {
         palette:{
             primary:{
                 main: '#1a237e',
+                contrastText: "#fff"
             },
             secondary:{
                 main: '#40c4ff',
@@ -25,6 +26,7 @@ const ColorThemeProvider: React.FC = ({children}) => {
               // Some CSS
               color: 'white',
             },
+            
           },
         },
 

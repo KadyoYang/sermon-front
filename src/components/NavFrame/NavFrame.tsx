@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const NavFrame: React.FC = ({children}) => {
     return(
         <Container>
-            <LeftBlank></LeftBlank>
+            <LeftBlank></LeftBlank>{/* 아무것도 없는 빈칸 */}
             <RightContent>{children}</RightContent>
         </Container>
     )
