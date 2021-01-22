@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import useSimpleAlert from './useSimpleAlert';
 import axios from 'axios';
-import axiosOption from '../utils/axiosOptions';
+import {postOption} from '../utils/axiosOptions';
 
 
 
@@ -19,7 +19,7 @@ const useSignup = () => {
 
     const onSignup = async() => {
         try{
-            const response = await axios(axiosOption("/user/signup", "post", {
+            const response = await axios(postOption("/user/signup", {
                 email: email,
                 password: password,
                 nickname: nickname

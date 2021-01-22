@@ -1,14 +1,14 @@
 import React, {createContext, useEffect, useState} from 'react';
 import useInterval from '../../hooks/useInterval';
 import axios from 'axios';
-import axiosOption from '../../utils/axiosOptions';
+import {getOption} from '../../utils/axiosOptions';
 import { setTokenSourceMapRange } from 'typescript';
 import useSimpleAlert from '../../hooks/useSimpleAlert';
 
 
 export interface AccountStatusContext{
     isLoggedIn: boolean,
-    token: String,
+    token: string,
     onSetIsLoggedIn: (isLoggedIn:boolean) => void,
     onSetToken: (token:string)=>void,
 }
@@ -32,7 +32,8 @@ const AccountStatusProvider: React.FC = ({children}) => {
     useInterval(async() => {
         if(isLoggedIn){
             try{      
-             const response = await axios(axiosOption("/user/auth","get", {}, token));
+             const response = await axios(getOption("/user/auth", {}, token));
+             console.log("tick");
             }catch(e){
                 console.log(e);
                 
@@ -42,6 +43,8 @@ const AccountStatusProvider: React.FC = ({children}) => {
                 // alert("로그인 세션이 끊어졌습니다.")
             }
         }
+        console.log("tock");
+        console.log(isLoggedIn);
     }, 5000);
 
 

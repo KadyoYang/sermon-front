@@ -30,17 +30,20 @@ function App() {
 
 const Providers: React.FC = ({ children }) => {
   return (
+    
 <ColorThemeProvider>
 
+<AccountStatusProvider>
+    <SimpleAlertProvider>
     <SimpleActionModalProvider>
-      <SimpleAlertProvider>
-        <AccountStatusProvider>
-          
+      
+        
             {children}
-          
-        </AccountStatusProvider>
-      </SimpleAlertProvider>
+
+      
     </SimpleActionModalProvider>
+    </SimpleAlertProvider>
+    </AccountStatusProvider>
 
 
 </ColorThemeProvider>

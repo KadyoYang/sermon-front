@@ -1,4 +1,4 @@
-import React, {useState, createContext} from 'react'
+import React, { useState, createContext } from 'react'
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -20,58 +20,57 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export interface SimpleAlertProviderProps{
-    fillTitle:(title:string)=>void,
-    fillSubTitle:(subTitle:string)=>void,
-    handleOpen:()=>void,
-    handleClose:()=>void,
+export interface SimpleAlertProviderProps {
+  fillTitle: (title: string) => void,
+  fillSubTitle: (subTitle: string) => void,
+  handleOpen: () => void,
+  handleClose: () => void,
 }
 
 export const Context = createContext<SimpleAlertProviderProps>({
-    fillTitle:(title:string)=>{},
-    fillSubTitle:(subTitle:string)=>{},
-    handleOpen:()=>{},
-    handleClose:()=>{},
+  fillTitle: (title: string) => { },
+  fillSubTitle: (subTitle: string) => { },
+  handleOpen: () => { },
+  handleClose: () => { },
 })
 
-const SimpleAlertProvider:React.FC = ({children}) => {
-    const [title, setTitle] = useState<string>("");
-    const [subTitle, setSubTitle] = useState<string>("");
+const SimpleAlertProvider: React.FC = ({ children }) => {
+  const [title, setTitle] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
 
-    const fillTitle = (title:string) => {setTitle(title);}
-    const fillSubTitle = (subTitle:string)=>{setSubTitle(subTitle);}
+  const fillTitle = (title: string) => { setTitle(title); }
+  const fillSubTitle = (subTitle: string) => { setSubTitle(subTitle); }
 
-    const [open, setOpen] = useState<boolean>(false);
-    const handleOpen = () => {setOpen(true);}
-    const handleClose = () => {setOpen(false);}
+  const [open, setOpen] = useState<boolean>(false);
+  const handleOpen = () => { setOpen(true); }
+  const handleClose = () => { setOpen(false); }
 
-    const classes = useStyles();
+  const classes = useStyles();
 
 
-    const body = (
-        <div className={classes.paper}>
-          <h2 id="simple-modal-title">{title}</h2>
-          <p id="simple-modal-description">
-            {subTitle}
-          </p>
-        </div>
-      );
 
-    return (
-    <Context.Provider value={{fillTitle, fillSubTitle, handleOpen, handleClose}}>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-        >
-            {body}
-        </Modal>
-        {children}
+  return (
+    <Context.Provider value={{ fillTitle, fillSubTitle, handleOpen, handleClose }}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {
+          <div className={classes.paper}>
+            <h2 id="simple-modal-title">{title}</h2>
+            <p id="simple-modal-description">
+              {subTitle}
+            </p>
+          </div>
+        }
+      </Modal>
+      {children}
     </Context.Provider>
-    )
-    
-    
+  )
+
+
 }
 
 

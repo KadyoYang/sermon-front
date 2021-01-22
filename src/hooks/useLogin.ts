@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useState} from 'react';
-import axiosOption from '../utils/axiosOptions';
+import {postOption} from '../utils/axiosOptions';
 import {parseJwt} from '../utils/jwtTool';
 import useIsLoggedIn from './useIsLoggedIn';
 import useJwt from './useJwt';
@@ -22,15 +22,19 @@ const useLogin = () => {
 
     const onLogin = async() => {
         try{
-            const response = await axios(axiosOption("/user/login", "post", {
+            const response = await axios(postOption("/user/login", {
                 email: email,
                 password: password
             }, ""));
             // response 파싱 후 
             // AccountStatusContext에 저장 
             const jwtWithBearer = response.headers.authorization;
-            onSetToken(jwtWithBearer);
+            console.log(response.headers);
+            console.log(response.headers.authorization)
+            const token = jwtWithBearer.split(' ')[1];
+            onSetToken(token);
             onSetIsLoggedIn(true);
+            showAlert("알림", "로그인에 성공했습니다");
         }catch(e){
             console.log(e);
             showAlert("알림", "로그인에 실패했습니다");

@@ -18,20 +18,6 @@ axiosOptions.delete = genDeleteOptions; */
 type httpMethod = 'get' | 'post' | 'put' | 'delete';
 
 
-const axiosOption = (path:string, method:httpMethod, arg:{}, token:string) => {
-    const options:AxiosRequestConfig = {
-        method: method,
-        url: serverUrl+path,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': CONTENT_TYPE_APP_URLENCODED,
-            'Authorization' : token
-        },
-        params: arg 
-    }
-    return options;
-}
-
 export const getOption = (path:string, arg:{}, token:string) => {
     const options:AxiosRequestConfig = {
         method: 'get',
@@ -39,54 +25,52 @@ export const getOption = (path:string, arg:{}, token:string) => {
         headers: {
             'Accept': 'application/json',
             'Content-Type': CONTENT_TYPE_APP_URLENCODED,
-            'Authorization' : token
+            'Authorization' :'BEARER ' + token
         },
         params: arg 
     }
     return options;
 }
 
-const postOption = (path:string, arg:{}, token:string) => {
+export const postOption = (path:string, arg:{}, token:string) => {
     const options:AxiosRequestConfig = {
         method: 'post',
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
             'Content-Type': CONTENT_TYPE_APP_URLENCODED,
-            'Authorization' : token
+            'Authorization' :'BEARER ' + token
         },
         data : qs.stringify(arg)
     }
     return options;
 }
 
-const putOption = (path:string, arg:{}, token:string) => {
+export const putOption = (path:string, arg:{}, token:string) => {
     const options:AxiosRequestConfig = {
         method: 'PUT',
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
             'Content-Type': CONTENT_TYPE_APP_URLENCODED,
-            'Authorization' : token
+            'Authorization' :'BEARER ' + token
         },
         data: qs.stringify(arg)
     }
     return options;
 }
 
-const deleteOption = (path:string, arg:{}, token:string) => {
+export const deleteOption = (path:string, arg:{}, token:string) => {
     const options:AxiosRequestConfig = {
         method: 'DELETE',
         url: serverUrl+path,
         headers: {
             'Accept': 'application/json',
             'Content-Type': CONTENT_TYPE_APP_URLENCODED,
-            'Authorization' : token
+            'Authorization' :'BEARER ' + token
         },
         data: qs.stringify(arg)
     }
     return options;
 }
 
-
-export default axiosOption;

@@ -13,9 +13,6 @@ import SignupForm from './components/SignupForm';
 const SignupButton:React.FC = () => {
     const {showActionModal, handleClose} = useSimpleActionModal();
 
-  
-
-
     return (
             <Button variant="contained" color="secondary" onClick={()=>{showActionModal("회원가입", "정보를 입력해주세요", <SignupForm handleClose={handleClose} />);}}>
                 <Typography variant="subtitle1" gutterBottom>회원가입</Typography>

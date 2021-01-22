@@ -10,6 +10,7 @@ const useSimpleAlert = () => {
         fillTitle(title);
         fillSubTitle(subTitle);
         handleOpen();
+        console.log("useSimpleAlert.showAlert");
     }
     return showAlert;
 }

@@ -15,9 +15,7 @@ const AccountTag: React.FC = () => {
 
     return (
         <AccountTagContainer>
-            {isLoggedIn == true
-            ?(<Typography variant="subtitle1" gutterBottom>{nickname}님 반갑습니다.</Typography>)
-            :(
+            {isLoggedIn?(<Typography variant="subtitle1" gutterBottom>{nickname}님 반갑습니다.</Typography>):(
                 <StyledButtonContainer>
                     <Typography variant="subtitle1" color="secondary" gutterBottom>지금 로그인 해서 고민을 공유하세요</Typography>
                     <LoginButton />

@@ -48,21 +48,10 @@ const SimpleActionModalProvider:React.FC = ({children}) => {
     const handleClose = () => {setOpen(false);}
 
     const [content, setContent] = useState<React.ReactNode>(<div>null</div>);
-    const fillContent = (content:React.ReactNode) => {setContent(content);console.log("fillcontent")}
-
-
+    const fillContent = (content:React.ReactNode) => {setContent(content);}
 
 
     const classes = useStyles();
-
-/*     useEffect(()=>{
-      if(open==false){
-        setTitle("");
-        setSubTitle("");
-        setContent((<div></div>));
-      }else{}
-
-    }, [open]) */
 
 
 

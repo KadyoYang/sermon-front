@@ -17,7 +17,7 @@ const useMyAccountInfo = () => {
 
     useEffect(()=>{
         if(isLoggedIn){
-            const parsedJwt = parseJwt(token.split(' ')[1]);
+            const parsedJwt = parseJwt(token);
             setId(parsedJwt.id);
             setNickname(parsedJwt.nickname);
             setEmail(parsedJwt.email);
