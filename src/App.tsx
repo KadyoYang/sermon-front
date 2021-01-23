@@ -10,7 +10,15 @@ import SimpleActionModalProvider from './contexts/SimpleActionModalProvider';
 import FrameContainer from './components/FrameContainer';
 import MainFrame from './components/MainFrame';
 import NavFrame from './components/NavFrame';
+
 import MainPage from './views/MainPage';
+import QuestionListPage from './views/QuestionListPage'
+
+import {createStore} from 'redux';
+import rootReducer from './redux';
+import {Provider} from 'react-redux';
+
+const store = createStore(rootReducer);
 
 function App() {
   return (
@@ -19,7 +27,7 @@ function App() {
         <Route exact path="/" component={MainPage} /> {/* 반 왼쪽:소개 보러가기,  오른쪽:로그인 회원가입 */}
 
           <Switch>
-              <Route exact path="/question" />{/* 질문 리스트 */}
+              <Route exact path="/question" component={QuestionListPage}/>{/* 질문 리스트 */}
               <Route exact path="/question/:qid" /> {/* 질문 상세 */}
           </Switch>
 
@@ -32,7 +40,8 @@ const Providers: React.FC = ({ children }) => {
   return (
     
 <ColorThemeProvider>
-
+<Provider store={store}>
+  
 <AccountStatusProvider>
     <SimpleAlertProvider>
     <SimpleActionModalProvider>
@@ -45,7 +54,7 @@ const Providers: React.FC = ({ children }) => {
     </SimpleAlertProvider>
     </AccountStatusProvider>
 
-
+    </Provider>
 </ColorThemeProvider>
   )
 }

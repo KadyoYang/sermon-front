@@ -6,20 +6,21 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import mainharf from '../../assets/image/mainharf.png'
-
+import {useHistory} from 'react-router-dom';
 const MainPage:React.FC = () => {
+    const history = useHistory();
     
     return (
         <MainPageContainer>
 
             <MainPageContentContainer>
                 <MainPageContentLeftElement>
-                    <Typography variant="h3" gutterBottom>고민을 공유하세요</Typography>
+                    <Typography variant="h3" >고민을 공유하세요</Typography>
                     <Typography variant="h6" gutterBottom>혼자서 고민을 전부 감당하지 마세요!</Typography>
                     
-                    <Typography variant="h3" gutterBottom>다른 사람의 고민에 대답해보세요</Typography>
+                    <Typography variant="h3" >다른 사람의 고민에 대답해보세요</Typography>
                     <Typography variant="h6" gutterBottom>고민을 듣고 조언할 수 있습니다!</Typography>
-                    <Button variant="outlined" color="primary"><Typography variant="h3" gutterBottom>지금 출발!</Typography></Button>
+                    <Button variant="outlined" color="primary" onClick={()=>{history.push("/question")}}><Typography variant="h3">지금 출발!</Typography></Button>
                 </MainPageContentLeftElement>
                 <MainPageContentRightElement>
                     <RightElement><AccountTag /></RightElement>

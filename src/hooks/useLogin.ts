@@ -4,6 +4,7 @@ import {postOption} from '../utils/axiosOptions';
 import {parseJwt} from '../utils/jwtTool';
 import useIsLoggedIn from './useIsLoggedIn';
 import useJwt from './useJwt';
+import useSimpleActionModal from './useSimpleActionModal';
 import useSimpleAlert from './useSimpleAlert';
 
 
@@ -20,6 +21,8 @@ const useLogin = () => {
 
     const showAlert = useSimpleAlert();
 
+    const {handleClose} = useSimpleActionModal();
+
     const onLogin = async() => {
         try{
             const response = await axios(postOption("/user/login", {
@@ -34,9 +37,11 @@ const useLogin = () => {
             const token = jwtWithBearer.split(' ')[1];
             onSetToken(token);
             onSetIsLoggedIn(true);
+            handleClose();
             showAlert("알림", "로그인에 성공했습니다");
         }catch(e){
             console.log(e);
+            
             showAlert("알림", "로그인에 실패했습니다");
         }
     }

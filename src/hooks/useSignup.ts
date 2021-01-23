@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import useSimpleAlert from './useSimpleAlert';
 import axios from 'axios';
 import {postOption} from '../utils/axiosOptions';
+import useSimpleActionModal from './useSimpleActionModal';
 
 
 
@@ -15,7 +16,7 @@ const useSignup = () => {
     const onSetNickname = (e:React.ChangeEvent<HTMLInputElement>) => {setNickname(e.target.value);}
 
     const showAlert = useSimpleAlert();
-
+    const {handleClose} = useSimpleActionModal();
 
     const onSignup = async() => {
         try{
@@ -24,6 +25,7 @@ const useSignup = () => {
                 password: password,
                 nickname: nickname
             }, ""));
+            handleClose();
             showAlert("알림", "회원가입에 성공했습니다");
         }catch(e){
             console.log(e);
