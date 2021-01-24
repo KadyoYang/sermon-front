@@ -23,7 +23,7 @@ const PageContent: React.FC = ({children}) => {
 
 const StyledPageContent = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-direction: column;
   margin-top: 3rem;
 `

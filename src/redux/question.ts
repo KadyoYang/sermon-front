@@ -52,8 +52,8 @@ interface QuestionStateType{
 }
 // 초기상태
 const initialState:QuestionStateType = {
-    questions: [{id:0, title:"", content:"", date:"", accountId:0, status:"", answersSize:0}],
-    paging: {pageNumber:0, pageSize:10}
+    questions: [{id:0, title:"", content:"", date:"", accountId:0, nickname:"", status:"", answersSize:0}],
+    paging: {pageNumber:1, pageSize:20}
 }
 
 

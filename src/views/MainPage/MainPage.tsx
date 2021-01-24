@@ -5,7 +5,7 @@ import MainPageFooter from './components/MainPageFooter';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import mainharf from '../../assets/image/mainharf.png'
+import mainhalf from '../../assets/image/mainhalf.png'
 import {useHistory} from 'react-router-dom';
 const MainPage:React.FC = () => {
     const history = useHistory();
@@ -55,7 +55,7 @@ flex-grow:1;
 
 `
 const MainPageContentLeftElement = styled.div`
-background:linear-gradient(#91d8d4, rgba(255,255,255,0.5)), url(${mainharf});
+background:linear-gradient(#91d8d4, rgba(255,255,255,0.5)), url(${mainhalf});
 background-size: 100%;
 
 width:50%;

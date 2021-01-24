@@ -7,10 +7,6 @@ import AccountStatusProvider from './contexts/AccountStatusProvider';
 import SimpleAlertProvider from './contexts/SimpleAlertProvider';
 import SimpleActionModalProvider from './contexts/SimpleActionModalProvider';
 
-import FrameContainer from './components/FrameContainer';
-import MainFrame from './components/MainFrame';
-import NavFrame from './components/NavFrame';
-
 import MainPage from './views/MainPage';
 import QuestionListPage from './views/QuestionListPage'
 

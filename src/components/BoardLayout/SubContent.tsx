@@ -14,7 +14,9 @@ export const SubContent:React.FC = ({children}) =>{
 
 const StyledSubContent = styled.div`
 max-width:350px;
-margin-right:10px;
+margin-left:0.5rem;
+
+box-sizing: border-box;
 
 display:flex;
 flex-direction:column;

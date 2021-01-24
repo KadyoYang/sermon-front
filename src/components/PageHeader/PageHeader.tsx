@@ -4,7 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 
-
+const useStyles = makeStyles({
+  center: {
+    alignSelf: "center"
+  }
+});
 
 
 interface PageHeaderProps {
@@ -14,15 +18,16 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
+  const classes = useStyles();
 
   return (
       <StyledPageHeader>
-        <Typography variant="h6" gutterBottom>{title}</Typography>
+        <Typography variant="h5" className={classes.center}color="secondary" gutterBottom>{title}</Typography>
 
         <StyledImageSpace>
-          <img src={icon} />
+          <StyledImage src={icon}/>
           <StyledSubTitleOnTheImage>
-            <Typography variant="subtitle2" gutterBottom>{subtitle}</Typography>
+            <Typography variant="h6" color="secondary" gutterBottom>{subtitle}</Typography>
           </StyledSubTitleOnTheImage>
         </StyledImageSpace>
 
@@ -35,9 +40,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
 const StyledPageHeader = styled.div`
 display: flex;
 flex-direction: column;
+align-items:stretch;
+margin-bottom:3px;
 `
 
 const StyledImageSpace = styled.div`
+
 position:relative;
 text-align: center;
 
@@ -52,7 +60,11 @@ left:50%;
 transform: translate(-50%, -50%);
 `
 
-
+const StyledImage = styled.img`
+max-height:150px;
+width: 100%;
+opacity:0.5;
+`
 
 
 

@@ -4,6 +4,7 @@ export interface QuestionType{
     content:string
     date: string
     accountId:number
+    nickname:string
     status: string
     answersSize: number
 }

@@ -33,7 +33,7 @@ const StyledContentSub = styled.div`
 display:flex;
 
 align-items:stretch;
-justify-content: space-between;
+justify-content: flex-start;
 width:990px;
 flex-shrink:0;
 flex-grow:2;
