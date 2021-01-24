@@ -5,24 +5,30 @@ import useMyAccountInfo from '../../hooks/useMyAccountInfo';
 import Typography from '@material-ui/core/Typography';
 import LoginButton from '../LoginButton';
 import SignupButton from '../SignupButton';
+import LogoutButton from '../LogoutButton';
 
 
 
 const AccountTag: React.FC = () => {
-    const {isLoggedIn} = useIsLoggedIn();
-    const {id, email, nickname, role} = useMyAccountInfo();
+    const { isLoggedIn } = useIsLoggedIn();
+    const { id, email, nickname, role } = useMyAccountInfo();
 
 
     return (
         <AccountTagContainer>
-            {isLoggedIn?(<Typography variant="button" color="secondary" gutterBottom>{nickname}님 반갑습니다.</Typography>):(
+            {isLoggedIn ? (
                 <StyledButtonContainer>
-                    <Typography variant="subtitle1" color="secondary" gutterBottom>지금 로그인 해서 고민을 공유하세요</Typography>
-                    <LoginButton />
-                    <Typography variant="subtitle1" color="secondary" gutterBottom>계정이 없으신가요?</Typography>
-                    <SignupButton />
+                <Typography variant="button" color="secondary" gutterBottom>{nickname}님 반갑습니다.</Typography>
+                <LogoutButton />
                 </StyledButtonContainer>
-            )
+            ) : (
+                    <StyledButtonContainer>
+                        <Typography variant="subtitle1" color="secondary" gutterBottom>지금 로그인 해서 고민을 공유하세요</Typography>
+                        <LoginButton />
+                        <Typography variant="subtitle1" color="secondary" gutterBottom>계정이 없으신가요?</Typography>
+                        <SignupButton />
+                    </StyledButtonContainer>
+                )
             }
         </AccountTagContainer>
     )

@@ -9,10 +9,12 @@ import SimpleActionModalProvider from './contexts/SimpleActionModalProvider';
 
 import MainPage from './views/MainPage';
 import QuestionListPage from './views/QuestionListPage'
+import QuestionDetailPage from './views/QuestionDetailPage';
 
 import {createStore} from 'redux';
 import rootReducer from './redux';
 import {Provider} from 'react-redux';
+
 
 const store = createStore(rootReducer);
 
@@ -24,7 +26,7 @@ function App() {
 
           <Switch>
               <Route exact path="/question" component={QuestionListPage}/>{/* 질문 리스트 */}
-              <Route exact path="/question/:qid" /> {/* 질문 상세 */}
+              <Route exact path="/question/:questionId" component={QuestionDetailPage} /> {/* 질문 상세 */}
           </Switch>
 
       </BrowserRouter>

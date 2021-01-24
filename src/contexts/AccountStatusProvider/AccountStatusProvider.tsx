@@ -29,6 +29,15 @@ const AccountStatusProvider: React.FC = ({children}) => {
     const onSetToken = (token:string) => {setToken(token);}
 
     const showAlert = useSimpleAlert();
+
+    useEffect(()=>{
+        let lsToken = localStorage.getItem("token");
+        if(isLoggedIn == false && lsToken != null){
+            setToken(lsToken);
+            setIsLoggedIn(true);
+        }
+    }, [])
+
     useInterval(async() => {
         if(isLoggedIn){
             try{      

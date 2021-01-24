@@ -39,6 +39,8 @@ const useLogin = () => {
             onSetIsLoggedIn(true);
             handleClose();
             showAlert("알림", "로그인에 성공했습니다");
+            localStorage.removeItem("token");
+            localStorage.setItem("token", token);
         }catch(e){
             console.log(e);
             

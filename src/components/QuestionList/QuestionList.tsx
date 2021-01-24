@@ -14,19 +14,6 @@ import ErrorIcon from '@material-ui/icons/Error'
 import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 import useSimpleActionModal from '../../hooks/useSimpleActionModal';
 import QuestionWritingForm from '../QuestionWritingForm';
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        width: 500,
-        height: 450,
-    },
-}));
 
 
 
