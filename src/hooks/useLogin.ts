@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {postOption} from '../utils/axiosOptions';
 import {parseJwt} from '../utils/jwtTool';
 import useIsLoggedIn from './useIsLoggedIn';
@@ -13,8 +13,8 @@ const useLogin = () => {
     const [email, setEmail] = useState<string>();
     const [password, setPassword] = useState<string>();
 
-    const onSetEmail = (e: React.ChangeEvent<HTMLInputElement>) => {setEmail(e.target.value);}
-    const onSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {setPassword(e.target.value);}
+    const onSetEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {setEmail(e.target.value);},[]);
+    const onSetPassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {setPassword(e.target.value);}, []);
 
     const {onSetToken} = useJwt();
     const {onSetIsLoggedIn} = useIsLoggedIn();

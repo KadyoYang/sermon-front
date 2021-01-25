@@ -5,7 +5,7 @@ import { getOption } from '../utils/axiosOptions';
 import {RootStateType} from '../redux'
 import {QuestionType} from '../models'
 import useSimpleAlert from './useSimpleAlert';
-import { setPaging, setQuestions } from '../redux/question';
+import { addQuestions, setPaging, setQuestions } from '../redux/question';
 
 const useQuestions = () => {
     const questions:QuestionType[] = useSelector((state:RootStateType) => state.question.questions);
@@ -30,15 +30,34 @@ const useQuestions = () => {
     }
 
     const refreshQuestions = () => {
-        dispatch(setPaging({pageNumber:1, pageSize:20}))
+        dispatch(setPaging({pageNumber:1, pageSize:15}))
         fetchQuestionList();
+    }
+    /**
+     * return : boolean
+     * true means (there is more questions and fetched)
+     * false means (there is no more questions)
+     */
+    const fetchMoreQuestionList = async() => {
+        try{
+            const lastIndex = questions[questions.length-1].id;
+            const response = await axios(getOption("/board/question/more", {
+                pageNumber: pagingNumber,
+                pageSize: pagingSize,
+                lastIndex: lastIndex
+            }, ""));
+            const data:QuestionType[] = response.data;
+            dispatch(addQuestions(data));
+        }catch(e){
+            console.log(e);
+        }
     }
 
     useEffect(()=>{
         fetchQuestionList();
     }, []);
 
-    return {questions, refreshQuestions}
+    return {questions, refreshQuestions, fetchMoreQuestionList}
 
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import styled from 'styled-components';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,32 +14,34 @@ import ErrorIcon from '@material-ui/icons/Error'
 import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 import useSimpleActionModal from '../../hooks/useSimpleActionModal';
 import QuestionWritingForm from '../QuestionWritingForm';
+import { Button, Typography } from '@material-ui/core';
 
 
 
 
 const QuestionList: React.FC = ({ }) => {
-    const { questions } = useQuestions();
+    const { questions, fetchMoreQuestionList } = useQuestions();
     const { isLoggedIn } = useIsLoggedIn();
 
     const {showActionModal, handleClose} = useSimpleActionModal();
 
-    const loadOnScroll = (e:Event) =>{
-       //  if(this.state.currentCount == this.state.total) return;
+    // const loadOnScroll = useCallback(() =>{
+    //     const winScroll = /* document.body.scrollTop ||  */document.documentElement.scrollTop; // 현재 위치
+    //     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; // height
+    //     const scrolled = winScroll / height; // 1 맨밑 0 맨위
+    //     if(scrolled > 0.9){
+    //         console.log("triggered");
+    //         fetchMoreQuestionList();
+    //     }
 
-        var rect = e.getBoundingClientRect();
-        var isAtEnd = (
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
-        );
-    
-        //User at the end of content. load more content
+    // }, []);
 
-      }
+/*     useEffect(()=>{
+        window.addEventListener('scroll', loadOnScroll, {passive:true});
+        console.log("addEL");
 
-    useEffect(()=>{
-        window.addEventListener('scroll', loadOnScroll);
-    }, [])
+        return () => {window.removeEventListener('scroll', loadOnScroll); console.log("removeEL")}
+    }, []) */
     
 
 
@@ -71,6 +73,12 @@ const QuestionList: React.FC = ({ }) => {
                     <QuestionCard question={i} key={i.id} />
                 ))}
             </StyledQuestionList>
+            <StyledLoadMore>
+            <Button color="secondary" onClick={()=>{fetchMoreQuestionList();}}>
+                <Typography variant="subtitle1" gutterBottom>더보기</Typography>
+            </Button>
+            </StyledLoadMore>
+
         </StyledQuestionContainer>
 
     )
@@ -89,6 +97,22 @@ const StyledQuestionList = styled.div`
 display:flex;
 flex-wrap: wrap;
 justify-content:space-around; 
+`
+
+const StyledLoadMore = styled.div`
+background-color:${props => props.theme.palette.primary.main};
+&:hover{
+    background-color:${props => props.theme.palette.primary.light};
+}
+cursor:pointer;
+
+border: 1px solid ${props => props.theme.palette.primary.light};
+margin: 0.3rem;
+padding: 0.3rem;
+box-sizing: border-box;
+display:flex;
+flex-direction:column;
+align-items:stretch;
 `
 
 
