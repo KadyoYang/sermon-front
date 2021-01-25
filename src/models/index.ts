@@ -1,1 +1,1 @@
-export type {QuestionType, PagingType} from './models'
+export type {QuestionType, PagingType, AnswerType} from './models'

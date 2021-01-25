@@ -29,12 +29,16 @@ const QuestionDetail: React.FC = () => {
        fetchAnswerList(questionId);
    }, []);
 
+   const onRefreshAnswerList = () => {
+       fetchAnswerList(questionId);
+   }
+
    
     return (
         <StyledQuestionDetailContainer>
             <StyledIconSpace>            
                 <Tooltip title="뒤로가기" onClick={()=>{history.goBack();}}>
-                    <Fab color="primary">
+                    <Fab color="primary" size="small">
                         <BackSpace />
                     </Fab>
                 </Tooltip>
@@ -42,11 +46,11 @@ const QuestionDetail: React.FC = () => {
 
 
             <StyledQuestionDetail>
-                <QuestionDetailCard question={question} onFetchQuestion={onFetchQuestion}/>
+                <QuestionDetailCard question={question} onFetchQuestion={onFetchQuestion} onRefreshAnswerList={onRefreshAnswerList}/>
             </StyledQuestionDetail>
 
             <StyledAnswersContainer>
-                <AnswerList answers={answers} fetchAnswerList={fetchAnswerList} />
+                <AnswerList ownerAccountNumber={question.accountId} answers={answers} onRefreshAnswerList={onRefreshAnswerList} />
             </StyledAnswersContainer>
         </StyledQuestionDetailContainer>
 
@@ -60,6 +64,7 @@ flex-direction:column;
 const StyledIconSpace = styled.div`
 align-self: flex-start;
 margin-left:0.5rem;
+margin-bottom:0.5rem;
 `
 
 const StyledQuestionDetail = styled.div`
@@ -68,8 +73,8 @@ const StyledQuestionDetail = styled.div`
 
 const StyledAnswersContainer = styled.div`
 display:flex;
-flex-wrap: wrap;
-justify-content:space-around; 
+flex-direction:column;
+align-items:stretch
 `
 
 

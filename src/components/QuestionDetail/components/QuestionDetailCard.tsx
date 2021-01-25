@@ -19,16 +19,17 @@ import useIsLoggedIn from '../../../hooks/useIsLoggedIn';
 interface QuestionCardProps {
     question: QuestionType
     onFetchQuestion: (questionId: number) => Promise<void>
+    onRefreshAnswerList: () => void;
 }
 // (제목 닉네임) (내용) (조회수, 날짜, )
-const QuestionDetailCard: React.FC<QuestionCardProps> = ({ question, onFetchQuestion }) => {
+const QuestionDetailCard: React.FC<QuestionCardProps> = ({ question, onFetchQuestion, onRefreshAnswerList}) => {
     const { id } = useMyAccountInfo();
     const { showActionModal, handleClose } = useSimpleActionModal();
     const history = useHistory();
     const { onDelQuestion } = useDelQuestion(question, () => { history.push("/question") });
     const {isLoggedIn} = useIsLoggedIn();
     const callback = () => {
-        onFetchQuestion(question.id);
+        onRefreshAnswerList();
     }
 
     return (

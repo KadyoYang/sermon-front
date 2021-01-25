@@ -6,17 +6,18 @@ import AnswerCard from './AnswerCard';
 
 interface AnswerListProps{
     answers: AnswerType[]|undefined
-    fetchAnswerList : (questionId: number)=>Promise<void>
+    onRefreshAnswerList : ()=>void
+    ownerAccountNumber: number
 }
 
-const AnswerList:React.FC<AnswerListProps> = ({answers, fetchAnswerList}) => {
+const AnswerList:React.FC<AnswerListProps> = ({answers, onRefreshAnswerList, ownerAccountNumber}) => {
     
-
+    
 
     return (
     <StyledAnswerList>
         {answers?.map((i)=>(
-            <AnswerCard answer={i} key={i.id} />
+            <AnswerCard ownerAccountNumber={ownerAccountNumber} answer={i} onRefreshAnswerList={onRefreshAnswerList} key={i.id} />
         ))}
     </StyledAnswerList>
     )

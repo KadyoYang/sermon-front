@@ -22,10 +22,11 @@ export interface AnswerType{
     createdDate:string
     accountId:number
     questionId:number
-    isAdopted:boolean
+    adopted:boolean
     star:number
     nickname:string
 }
+
 
 /*
     private Long id;
