@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,6 +23,25 @@ const QuestionList: React.FC = ({ }) => {
     const { isLoggedIn } = useIsLoggedIn();
 
     const {showActionModal, handleClose} = useSimpleActionModal();
+
+    const loadOnScroll = (e:Event) =>{
+       //  if(this.state.currentCount == this.state.total) return;
+
+        var rect = e.getBoundingClientRect();
+        var isAtEnd = (
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+        );
+    
+        //User at the end of content. load more content
+
+      }
+
+    useEffect(()=>{
+        window.addEventListener('scroll', loadOnScroll);
+    }, [])
+    
+
 
     return (
         <StyledQuestionContainer>
