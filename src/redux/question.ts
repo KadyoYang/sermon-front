@@ -5,6 +5,7 @@ const SET_QUESTION_LIST = 'question/SET_QUESTION_LIST';
 const ADD_QUESTION_LIST = 'question/ADD_QUESTION_LIST';
 const SET_PAGING = 'question/SET_PAGING';
 const INC_PAGING_NUMBER = 'question/INC_PAGING_NUMBER';
+const SET_HASH_TAG='question/SET_HASH_TAG';
 
 // action type
 interface SetQuestionActionType{
@@ -42,18 +43,30 @@ export const incPagingNumber = ():IncPagingNumberType => ({
     type: INC_PAGING_NUMBER
 })
 
+interface SetHashTagType{
+    type: typeof SET_HASH_TAG,
+    hashtag : string
+}
 
-type ActionTypes = SetQuestionActionType | AddQuestionActionType | SetPagingType | IncPagingNumberType
+export const setHashTagonRedux = (hashtag:string):SetHashTagType => ({
+    type: SET_HASH_TAG,
+    hashtag:hashtag,
+})
+
+
+type ActionTypes = SetQuestionActionType | AddQuestionActionType | SetPagingType | IncPagingNumberType | SetHashTagType
 
 
 interface QuestionStateType{
     questions: QuestionType[]
     paging: PagingType
+    hashtag : string
 }
 // 초기상태
 const initialState:QuestionStateType = {
-    questions: [{id:0, title:"", content:"", createdDate:"", accountId:0, nickname:"", status:"", answersSize:0, viewCount:0}],
-    paging: {pageNumber:1, pageSize:15}
+    questions: [{id:0, title:"", content:"", createdDate:"", accountId:0, nickname:"", status:"", answersSize:0, viewCount:0, hashTags:[]}],
+    paging: {pageNumber:1, pageSize:15},
+    hashtag : "",
 }
 
 
@@ -80,6 +93,11 @@ export default function question(state=initialState, action:ActionTypes):Questio
             return{
                 ...state,
                 paging: {pageNumber : state.paging.pageNumber + 1, pageSize: state.paging.pageSize}
+            }
+        case SET_HASH_TAG:
+            return{
+                ...state,
+                hashtag: action.hashtag
             }
         default:
             return state

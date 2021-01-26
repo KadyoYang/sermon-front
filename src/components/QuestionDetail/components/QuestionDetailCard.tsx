@@ -50,6 +50,15 @@ const QuestionDetailCard: React.FC<QuestionCardProps> = ({ question, onFetchQues
                     {question.content}
                 </Typography>
             </StyledQuestionContent>
+            <StyledQuestionContent>
+            {question.hashTags.map((i)=>(
+                            <Typography variant="body1" color="secondary">
+                                {"#"+i}
+                            </Typography>
+            ))}
+
+
+            </StyledQuestionContent>
             <StyledTypo variant="body2" color="secondary">{"작성시간 : " + question.createdDate}</StyledTypo>
 
             <StyledQuestionFooter>

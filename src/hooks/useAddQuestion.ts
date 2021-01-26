@@ -14,9 +14,11 @@ import useQuestions from './useQuestions';
 const useAddQuestion = () => {
     const [title, setTitle] = useState<string>();
     const [content, setContent] = useState<string>();
+    const [hashTags, setHashTags] = useState<string>("");
 
     const onSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => {setTitle(e.target.value);}
     const onSetContent = (e: React.ChangeEvent<HTMLInputElement>) => {setContent(e.target.value);}
+    const onSetHashTags = (e: React.ChangeEvent<HTMLInputElement>) => {setHashTags(e.target.value);}
 
     const {token} = useJwt();
     const {isLoggedIn} = useIsLoggedIn();
@@ -34,7 +36,8 @@ const useAddQuestion = () => {
         try{
             const response = await axios(postOption("/board/question", {
                 title: title,
-                content: content
+                content: content,
+                hashTags: hashTags
             }, token));
 
             handleClose();
@@ -50,7 +53,7 @@ const useAddQuestion = () => {
 
 
 
-    return {title, content, onSetTitle, onSetContent, onAddQuestion}
+    return {title, content, hashTags, setHashTags,  onSetTitle, onSetContent,onSetHashTags, onAddQuestion}
 }
 
 

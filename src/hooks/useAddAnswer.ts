@@ -13,10 +13,13 @@ import useSimpleAlert from './useSimpleAlert';
 const useAddAnswer = (questionId:number, callback:()=>void) => {
     const [title, setTitle] = useState<string>();
     const [content, setContent] = useState<string>();
+    
 
     const onSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => {setTitle(e.target.value);}
     const onSetContent = (e: React.ChangeEvent<HTMLInputElement>) => {setContent(e.target.value);}
-    
+
+
+
     const {token} = useJwt();
     const {isLoggedIn} = useIsLoggedIn();
 
@@ -31,7 +34,7 @@ const useAddAnswer = (questionId:number, callback:()=>void) => {
         try{
             const response = await axios(postOption("/board/question/"+questionId+"/answer", {
                 title: title,
-                content: content
+                content: content,
             }, token));
 
             handleClose();
