@@ -16,7 +16,8 @@ const initValue:QuestionType = {
     nickname:"",
     status: "",
     answersSize: 0,
-    viewCount:0
+    viewCount:0,
+    hashTags:[],
 }
 
 const useGetQuestion = () => {

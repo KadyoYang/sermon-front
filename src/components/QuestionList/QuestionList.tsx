@@ -15,6 +15,9 @@ import useIsLoggedIn from '../../hooks/useIsLoggedIn';
 import useSimpleActionModal from '../../hooks/useSimpleActionModal';
 import QuestionWritingForm from '../QuestionWritingForm';
 import { Button, Typography } from '@material-ui/core';
+import { RootStateType } from '../../redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setHashTagonRedux } from '../../redux/question';
 
 
 
@@ -24,6 +27,8 @@ const QuestionList: React.FC = ({ }) => {
     const { isLoggedIn } = useIsLoggedIn();
 
     const {showActionModal, handleClose} = useSimpleActionModal();
+    const hashTag = useSelector((state:RootStateType)=> state.question.hashtag);
+    const dispatch = useDispatch();
 
     // const loadOnScroll = useCallback(() =>{
     //     const winScroll = /* document.body.scrollTop ||  */document.documentElement.scrollTop; // 현재 위치
@@ -47,6 +52,12 @@ const QuestionList: React.FC = ({ }) => {
 
     return (
         <StyledQuestionContainer>
+            
+            {hashTag != "" && (<StyledSearchResultIndicator><Typography variant="subtitle1" color="secondary" gutterBottom>{hashTag }로 검색결과</Typography>
+            <Typography variant="subtitle1" onClick={()=>{dispatch(setHashTagonRedux(""))}} color="secondary">검색 초기화</Typography>
+            </StyledSearchResultIndicator>)}
+            
+            
             <StyledIconSpace>
                 {isLoggedIn ? (
                     <Tooltip title="Add" aria-label="add">
@@ -113,6 +124,11 @@ box-sizing: border-box;
 display:flex;
 flex-direction:column;
 align-items:stretch;
+`
+
+const StyledSearchResultIndicator = styled.div`
+margin-left:2rem;
+box-sizing:border-box;
 `
 
 

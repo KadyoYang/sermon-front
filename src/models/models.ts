@@ -8,6 +8,7 @@ export interface QuestionType{
     status: string
     answersSize: number
     viewCount:number
+    hashTags:string[]
 }
 
 export interface PagingType{

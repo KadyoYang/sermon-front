@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader';
 import mainLogo from '../../assets/image/mainhalf.png';
 import QuestionList from '../../components/QuestionList';
 import AccountTag from '../../components/AccountTag/AccountTag';
+import QuestionSearchTag from '../../components/QuestionSearchTag';
 
 
 
@@ -26,6 +27,7 @@ return (
                 </Page>
             </MainContent>
             <SubContent>
+                <QuestionSearchTag />
                 <AccountTag />
             </SubContent>
         </Content>

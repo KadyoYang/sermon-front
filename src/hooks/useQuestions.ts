@@ -6,19 +6,23 @@ import {RootStateType} from '../redux'
 import {QuestionType} from '../models'
 import useSimpleAlert from './useSimpleAlert';
 import { addQuestions, setPaging, setQuestions } from '../redux/question';
+import useQuery from './useQuery';
 
 const useQuestions = () => {
     const questions:QuestionType[] = useSelector((state:RootStateType) => state.question.questions);
     const pagingNumber = useSelector((state:RootStateType) => state.question.paging.pageNumber);
     const pagingSize = useSelector((state:RootStateType) => state.question.paging.pageSize);
+    const hashTag = useSelector((state:RootStateType)=> state.question.hashtag);
     const showAlert = useSimpleAlert();
     const dispatch = useDispatch();
+
 
     const fetchQuestionList = async() => {
         try{
             const response = await axios(getOption("/board/question", {
                 pageNumber: pagingNumber,
-                pageSize: pagingSize
+                pageSize: pagingSize,
+                hashTags: hashTag,
             }, ""));
             const data:QuestionType[] = response.data;
             dispatch(setQuestions(data));
@@ -44,7 +48,8 @@ const useQuestions = () => {
             const response = await axios(getOption("/board/question/more", {
                 pageNumber: pagingNumber,
                 pageSize: pagingSize,
-                lastIndex: lastIndex
+                lastIndex: lastIndex,
+                hashTags: hashTag,
             }, ""));
             const data:QuestionType[] = response.data;
             dispatch(addQuestions(data));
@@ -54,8 +59,15 @@ const useQuestions = () => {
     }
 
     useEffect(()=>{
-        fetchQuestionList();
+        if(questions.length < 2){
+            fetchQuestionList();
+        }
+        
     }, []);
+
+    useEffect(()=>{
+        fetchQuestionList();
+    }, [hashTag]);
 
     return {questions, refreshQuestions, fetchMoreQuestionList}
 
