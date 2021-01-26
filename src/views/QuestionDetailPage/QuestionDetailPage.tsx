@@ -9,6 +9,7 @@ import mainLogo from '../../assets/image/mainhalf.png';
 import QuestionDetail from '../../components/QuestionDetail';
 
 import { useParams } from "react-router-dom";
+import QuestionSearchTag from '../../components/QuestionSearchTag';
 
 
 const QuestionDetailPage:React.FC = () => {
@@ -29,6 +30,7 @@ const QuestionDetailPage:React.FC = () => {
                     </Page>
                 </MainContent>
                 <SubContent>
+                    <QuestionSearchTag />
                     <AccountTag />
                 </SubContent>
             </Content>

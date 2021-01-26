@@ -54,7 +54,10 @@ const useQuestions = () => {
     }
 
     useEffect(()=>{
-        fetchQuestionList();
+        if(questions.length < 2){
+            fetchQuestionList();
+        }
+        
     }, []);
 
     return {questions, refreshQuestions, fetchMoreQuestionList}

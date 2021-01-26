@@ -46,7 +46,7 @@ const AccountTagContainer = styled.div`
 border-radius: 20px;
 border:1px solid white;
 width: 100%;
-padding: 2rem;
+padding: 1.2rem;
 
 box-sizing:border-box;
 `
